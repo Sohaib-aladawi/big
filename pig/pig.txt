@@ -1,3 +1,5 @@
+-- local
+pig -x local
 -- Load dataset 'data_st1.csv'
 A = LOAD 'data_st1.csv' USING PigStorage(',') AS (id:int, name:chararray, dept:chararray);
 
