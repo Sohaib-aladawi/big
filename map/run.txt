@@ -1,0 +1,4 @@
+Command to run map-reduce without sorting. 
+cat f1.txt | python ./map2.py | python ./redc2.py 
+Command to run map-reduce with sorting. 
+cat f1 | python ./map1.py | sort | python ./redc1.py

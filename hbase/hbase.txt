@@ -1,0 +1,69 @@
+# List all tables
+list
+
+# Create a table
+create 'employee', 'personal', 'salary'
+
+# Insert data into the table
+put 'employee', '1', 'personal:name', 'Jaifer'
+put 'employee', '1', 'salary:basic', '3000'
+put 'employee', '103', 'personal:name', 'Mohammed'
+put 'employee', '103', 'personal:designation', 'Manager'
+
+# Scan the table to view all data
+scan 'employee'
+
+# Get a specific row
+get 'employee', '1'
+
+# Update a row (same as insert for existing row)
+put 'employee', '103', 'personal:designation', 'Manager'
+put 'employee', '103', 'personal:project_code', '222'
+
+# Delete a specific cell
+delete 'employee', '1', 'personal:name'
+
+# Delete an entire row
+deleteall 'employee', '1'
+
+# Count the number of rows in a table
+count 'employee'
+
+# Truncate a table (disable, drop, and recreate)
+truncate 'employee'
+
+# Disable and enable a table
+disable 'employee'
+enable 'employee'
+
+# Describe the structure of a table
+describe 'employee'
+
+# Drop a table
+drop 'employee'
+
+# Use filters in scans
+
+# RowFilter: Filters rows based on row keys
+scan 'employee', {FILTER => "RowFilter(=, 'binary:E001')"}
+
+# PrefixFilter: Filters rows based on a prefix match in row keys
+scan 'employee', {FILTER => "PrefixFilter('E0')"}
+
+# SingleColumnValueFilter: Filters rows based on a specific column's value
+scan 'employee', {FILTER => "SingleColumnValueFilter('work', 'salary', >=, 'binary:2000')"}
+
+# FamilyFilter: Filters based on column families
+scan 'employee', {FILTER => "FamilyFilter(=, 'binary:personal')"}
+
+# QualifierFilter: Filters based on column qualifiers
+scan 'employee', {FILTER => "QualifierFilter(=, 'binary:name')"}
+
+# ValueFilter: Filters based on cell values
+scan 'employee', {FILTER => "ValueFilter(=, 'substring:Jaifer')"}
+
+# PrefixFilter: Retrieve rows starting with a specific prefix in row keys
+scan 'employee', {FILTER => "PrefixFilter('10')"}
+
+# Substring matching in values
+scan 'employee', {FILTER => "ValueFilter(=, 'substring:Comp')"}

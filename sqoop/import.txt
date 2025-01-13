@@ -1,0 +1,7 @@
+ sqoop import \
+--connect "jdbc:mysql://localhost:3306/retail_db" \
+--username root \
+--password cloudera \
+--table customers \
+--target-dir /user/cloudera/custmor_data \
+--num-mappers 1

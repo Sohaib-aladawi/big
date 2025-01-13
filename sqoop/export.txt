@@ -1,0 +1,16 @@
+1. Create a directory in HDFS in /NCT.
+2. Create a file and type some sample data for the staff, put this file in the created directory
+NCT.
+3. Write appropriate export statement to fetch the data from HDFS file into table staff
+created in MySql.
+Hint:
+sqoop export \
+--connect "jdbc:mysql://localhost:3306/hct" \
+--username root \
+--password cloudera \
+--table emp \
+--export-dir /D/s2 \
+--input-fields-terminated-by ',' \
+--input-lines-terminated-by '\n'
+4. Write appropriate exportstatement to fetch the data from HDFS file into table department
+created in MySql.

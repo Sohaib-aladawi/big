@@ -1,0 +1,62 @@
+-- Load dataset 'data_st1.csv'
+A = LOAD 'data_st1.csv' USING PigStorage(',') AS (id:int, name:chararray, dept:chararray);
+
+-- Display all records from the dataset
+DUMP A;
+
+-- Filter records where id is greater than 250
+B = FILTER A BY id > 250;
+
+-- Group data by department
+C = GROUP A BY dept;
+
+-- Count total number of students per department
+D = FOREACH C GENERATE group AS department, COUNT(A) AS total_students;
+
+-- Load text file for word count example
+input_lines = LOAD '/input1/' AS (line:chararray);
+
+-- Tokenize lines into words
+words = FOREACH input_lines GENERATE FLATTEN(TOKENIZE(line)) AS word;
+
+-- Filter valid words (alphanumeric)
+filtered_words = FILTER words BY word MATCHES '\\w+';
+
+-- Group words and count occurrences
+word_groups = GROUP filtered_words BY word;
+word_count = FOREACH word_groups GENERATE COUNT(filtered_words) AS count, group AS word;
+
+-- Dump word count results
+DUMP word_count;
+
+-- Sort data by age in ascending order
+sorted_data = ORDER A BY age ASC;
+
+-- Display sorted data
+DUMP sorted_data;
+
+-- Limit output to top 5 ages
+limited_data = LIMIT sorted_data 5;
+DUMP limited_data;
+
+-- Load 'emp.csv' and 'salary.csv' datasets
+emp = LOAD 'emp.csv' USING PigStorage(',') AS (id:int, name:chararray, dept:chararray);
+sal = LOAD 'salary.csv' USING PigStorage(',') AS (id:int, salary:int);
+
+-- Join 'emp' and 'sal' datasets by employee id
+joined_data = JOIN emp BY id, sal BY id;
+DUMP joined_data;
+
+-- Co-group 'emp' and 'sal' datasets by employee id
+co_grouped = COGROUP emp BY id, sal BY id;
+
+-- Calculate average salary per department
+avg_salary_by_dept = FOREACH co_grouped GENERATE group AS emp_id, AVG(sal.salary) AS avg_salary;
+DUMP avg_salary_by_dept;
+
+-- Filter employees with salary greater than 1500
+high_salary = FILTER sal BY salary > 1500;
+
+-- Join high salary data with employee data
+high_salary_emp = JOIN emp BY id, high_salary BY id;
+DUMP high_salary_emp;

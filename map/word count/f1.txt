@@ -1,0 +1,34 @@
+Dear Customer,
+
+ 
+
+Greetings of the day!!
+
+ 
+
+In our continuous effort to keep you updated regarding changes in our Risk Management Policy, we would like to inform you that followings change has been done in Risk management policy and will be implemented as per the date mentioned against each point.
+
+ 
+
+Changes in policy of square-off for securities bought under Margin Trading facility (MTF) (Implemented w.e.f.15-Oct-2024 onwards):
+If the ratio of available collateral (Funding Stock + MTF Collateral) against debit (MTF Ledger) comes down to 15% or below 15% then Funding Stock / MTF Collateral of client may be sold on a real-time basis.
+ 
+
+Changes in Square-off policy for Physically settled contract of Stock derivative in Equity derivative segment (Implemented from Monthly Expiry of Oct-2024 onwards):
+In case of short position (Call Short/Future Short/Put Long) in stock derivative where delivery pay-in obligation may arise, may be squared-off on the expiry day (monthly), if client does not have delivery stock in his D-mat account (POA).
+OTM contracts in Stock Options which are away up to 2% from Underlying LTP, will also be considered as possible ITM and may be squared-off as per above policy
+ 
+
+As per the Circular NSE/INSP/64315, penalty levied by clearing corporations of short/non-collection of upfront margins will be passed on to client if short/non collection of upfront margin is on account of following reasons attributable to client (Implemented w.e.f.01-Nov-2024 onwards):
+                                            i.            Cheque issued by client to member is dishonoured.
+
+                                           ii.            Increase in margins on account of change in hedge position by client/ expiry of some leg(s) of the hedge positions of the clients
+
+ 
+
+For point 3(ii) above, any contrastive position created to safeguard losses in the portfolio during market volatility is a hedge position. Margin may Increase due to change/close in hedge position (s) of the client or Expiry of some leg(s) of the hedge position of the client. In case client does not have sufficient reportable balance (Collateral pledge +Ledger) then there will be Peak/EOD Margin Shortfall and penalty of peak /EOD margin shortfall will be levied to client. In a broader framework,  some of the potential reason where margin gets increased are given below. Below list is not exhaustive
+
+Increase in Margin due to change in client’s hedge position
+Increase in margin due to close of some leg(s) of client’s position.
+Increase in margin due to expiry of some leg(s) of client’s hedge position
+Increase in Margin due to loss of cross margin benefits like square off by the clients etc.

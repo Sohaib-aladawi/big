@@ -1,0 +1,93 @@
+-- Create Database
+CREATE DATABASE demo;
+
+-- Show Databases
+SHOW DATABASES;
+
+-- Use Database
+USE demo;
+
+-- Create Internal Table
+CREATE TABLE student (
+    name STRING,
+    rollno INT,
+    dept STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+-- Load Data into Internal Table (Local File)
+LOAD DATA LOCAL INPATH '/hjh/jk/mm/student' INTO TABLE student;
+
+-- Load Data into Internal Table (HDFS)
+-- Use this command to copy the file to HDFS first:
+-- hdfs dfs -mkdir /HiveData
+-- hdfs dfs -put /hjh/jk/mm/student /HiveData
+LOAD DATA INPATH '/HiveData/student' INTO TABLE student;
+
+-- Select All from Table
+SELECT * FROM student;
+
+-- Add/Merge Record (Local File)
+LOAD DATA LOCAL INPATH '/hjh/jk/mm/student1' INTO TABLE student;
+
+-- Add/Merge Record (HDFS)
+-- hdfs dfs -put /hjh/jk/mm/student1 /HiveData
+LOAD DATA INPATH '/HiveData/student1' INTO TABLE student;
+
+-- Describe Table Structure
+DESCRIBE student;
+
+-- View Table Metadata
+DESCRIBE EXTENDED student;
+
+-- Create External Table
+CREATE EXTERNAL TABLE external_student (
+    name STRING,
+    rollno INT,
+    dept STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/external/location/path';
+
+-- Create Partitioned Table
+CREATE TABLE partitioned_student (
+    name STRING,
+    rollno INT
+)
+PARTITIONED BY (dept STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+-- Add Partition to Table
+ALTER TABLE partitioned_student ADD PARTITION (dept='CS') LOCATION '/path/to/partition';
+
+-- Insert Data into Partitioned Table (Static Partitioning)
+INSERT INTO TABLE partitioned_student PARTITION (dept='CS')
+VALUES ('John', 101);
+
+-- Enable Dynamic Partitioning
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+-- Insert Data into Partitioned Table (Dynamic Partitioning)
+INSERT INTO TABLE partitioned_student PARTITION (dept)
+VALUES ('Doe', 102, 'IT');
+
+-- Create Bucketed Table
+CREATE TABLE bucketed_student (
+    name STRING,
+    rollno INT,
+    dept STRING
+)
+CLUSTERED BY (rollno) INTO 4 BUCKETS
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+-- Load Data into Bucketed Table (Local File)
+LOAD DATA LOCAL INPATH '/hjh/jk/mm/student' INTO TABLE bucketed_student;
+
+-- Load Data into Bucketed Table (HDFS)
+-- hdfs dfs -put /hjh/jk/mm/student /HiveData
+LOAD DATA INPATH '/HiveData/student' INTO TABLE bucketed_student;
