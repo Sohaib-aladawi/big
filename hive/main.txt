@@ -91,3 +91,9 @@ LOAD DATA LOCAL INPATH '/hjh/jk/mm/student' INTO TABLE bucketed_student;
 -- Load Data into Bucketed Table (HDFS)
 -- hdfs dfs -put /hjh/jk/mm/student /HiveData
 LOAD DATA INPATH '/HiveData/student' INTO TABLE bucketed_student;
+
+-- hive integration
+create table hivehbase2(key INT, Itemno INT, Name STRING, Amount INT)
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' 
+      WITH SERDEPROPERTIES("hbase.columns.mapping"=":key,Itemno:Itemno,Name:Name,Amount:Amount") 
+      TBLPROPERTIES("hbase.table.name"="Sales_master");
