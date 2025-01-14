@@ -51,6 +51,23 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 LOCATION '/external/location/path';
 
+--------
+set hive.cli.print.current.db=true;
+use part;
+
+create table student(name string, rollno int, per float)
+partitioned by (state string, city string)
+row format delimited
+fields terminated by ',';
+
+describe student;
+
+load data local inpath '/home/hadoop/Desktop/HadoopData/partstudmah' into table student
+partition(state="maharashtra", city="aurangabad");
+
+load data local inpath '/home/hadoop/Desktop/HadoopData/partstudgujrat' into table student
+partition(state="gujrat", city="surat");
+
 -- Create Partitioned Table
 CREATE TABLE partitioned_student (
     name STRING,
